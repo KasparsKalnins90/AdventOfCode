@@ -19,7 +19,7 @@
     {
         return File
             .ReadAllText(
-                $"{Directory.GetCurrentDirectory()}\\InputFiles\\{InputFileName}")
+                $"{Directory.GetCurrentDirectory()}\\Input\\{InputFileName}")
             .Split(ItemSeparator)
             .ToList();
     }

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Y2023", "Y2023\Y2023.csproj", "{DDADC5C6-E1A9-40F1-9F39-D1ED7B7DAD20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Y2023", "Y2023\Y2023.csproj", "{DDADC5C6-E1A9-40F1-9F39-D1ED7B7DAD20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Y2023.Tests", "Y2023.Tests\Y2023.Tests.csproj", "{08802571-0D08-4E15-A6BE-813595A88933}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Y2023.Tests", "Y2023.Tests\Y2023.Tests.csproj", "{08802571-0D08-4E15-A6BE-813595A88933}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeRunner", "CodeRunner\CodeRunner.csproj", "{9EA467E5-55CE-4CC0-841B-1069EFF281F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{08802571-0D08-4E15-A6BE-813595A88933}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08802571-0D08-4E15-A6BE-813595A88933}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08802571-0D08-4E15-A6BE-813595A88933}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA467E5-55CE-4CC0-841B-1069EFF281F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA467E5-55CE-4CC0-841B-1069EFF281F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA467E5-55CE-4CC0-841B-1069EFF281F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA467E5-55CE-4CC0-841B-1069EFF281F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
