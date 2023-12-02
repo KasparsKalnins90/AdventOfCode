@@ -29,4 +29,28 @@ public class Day1Tests
 
         CalibrationDocumentReader.SumCoordinates(input).Should().Be(142);
     }
+
+    [Theory]
+    [InlineData("onetwo", "12")]
+    [InlineData("eightwothree", "8wo3")]
+
+    public void TranslateWordsToNumbers_ShouldReturnExpected(string input, string expectedResult)
+    {
+        CalibrationDocumentReader.TranslateWordsToNumbers(input).Should().Be(expectedResult);
+    }
+
+    [Fact]
+    public void GetCoordinateSumImproved_ReturnsExpected()
+    {
+        var input = new List<string>() {
+            "two1nine",
+            "eightwothree",
+            "abcone2threexyz",
+            "xtwone3four",
+            "4nineeightseven2",
+            "zoneight234",
+            "7pqrstsixteen",};
+
+        CalibrationDocumentReader.SumCoordinatesImproved(input).Should().Be(281);
+    }
 }
