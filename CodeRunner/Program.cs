@@ -2,4 +2,6 @@
 using Y2023.Input;
 var fileReader = new InputFileReader("Day1.txt", "\r\n");
 var coordinateList = fileReader.GetItems();
-    Console.WriteLine(CalibrationDocumentReader.SumCoordinates(coordinateList));
+    //Console.WriteLine(CalibrationDocumentReader.SumCoordinates(coordinateList));
+Console.WriteLine(CalibrationDocumentReader.SumCoordinatesImproved(coordinateList));
+
