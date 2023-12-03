@@ -1,14 +1,12 @@
 ﻿using FluentAssertions;
+using System.Security.Cryptography;
 using Y2023.Day2;
 
 namespace Y2023.Tests;
 
 public class Day2Tests
 {
-    [Fact]
-    public void GetPossibleGames_ShouldReturnExpected()
-    {
-        var input = new List<string>
+    private readonly List<string> _input = new List<string>
         {
             "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green",
             "Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue",
@@ -17,7 +15,17 @@ public class Day2Tests
             "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green",
         };
 
-        CubeGameValidator.Validate(input).Should().Be(8);
+
+    [Fact]
+    public void Validate_ShouldReturnExpected()
+    {
+
+        CubeGameValidator.Validate(_input).Should().Be(8);
+    }
+
+    [Fact]
+    public void GetSumPower_ShouldReturnExpected() { 
+        CubeGameValidator.GetSumPower(_input).Should().Be(2286);
 
     }
 }
