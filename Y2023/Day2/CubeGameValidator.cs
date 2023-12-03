@@ -5,7 +5,6 @@ internal static class CubeGameValidator
     public static int Validate(List<string> cubeGames)
     {
         var games = cubeGames.Select(game => new CubeGame(game)).ToList();
-        //12 red cubes, 13 green cubes, and 14 blue cubes
         var result = games.Where(game => 
         game.cubeInfo["red"] <= 12 
         && game.cubeInfo["green"] <= 13
@@ -13,5 +12,22 @@ internal static class CubeGameValidator
             .Select(game => game.Id)
             .Sum();
         return result;
+    }
+
+    public static int GetSumPower(List<string> cubeGames)
+    {
+        var games = cubeGames.Select(game => new CubeGame(game)).ToList();
+        var total = 0;
+        var minNeededCubesInGames = games.Select(game => game.cubeInfo.Select(x => x.Value));
+        foreach (var cubes in minNeededCubesInGames)
+        {
+            var multiplicationResult = 1;
+            foreach (var item in cubes)
+            {
+                multiplicationResult *= item;
+            }
+            total += multiplicationResult;
+        }
+        return total;
     }
 }
