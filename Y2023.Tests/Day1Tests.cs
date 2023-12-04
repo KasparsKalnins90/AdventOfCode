@@ -1,6 +1,5 @@
 
 using FluentAssertions;
-using FluentAssertions.Extensions;
 using Y2023.Day1;
 
 namespace Y2023.Tests;
