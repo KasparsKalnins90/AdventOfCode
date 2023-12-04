@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Text;
+﻿using System.Text;
 
 namespace Y2023.Day3;
 
@@ -7,10 +6,53 @@ internal class EngineTools
 {
 
     private static readonly List<MappedChar> _map = new List<MappedChar>();
-    public static int GetSerialNumber(List<string> engineInfo)
+
+    public static int GetGearRatio(List<string> engineInfo)
     {
         MapEngineInfo(engineInfo);
 
+        var serialNumberParts = GetSerialNumberParts();
+
+        var serialNumbersNextToGears = serialNumberParts
+            .Where(serialNumerPart =>
+            serialNumerPart.Neighbors.Any(neigbor => neigbor.Value == '*')).ToList();
+
+        var pairs = new List<List<SerialNumberPart>>();
+        foreach (var serial in serialNumbersNextToGears)
+        {
+            var gearCoordinates = serial.Neighbors.First(n => n.Value == '*');
+            var onesWithSharedGears = serialNumbersNextToGears
+                .Where(serialNumberPart =>
+                serialNumberPart.Neighbors
+                .Any(neighbor =>
+                neighbor.X == gearCoordinates.X
+                && neighbor.Y == gearCoordinates.Y))
+                .ToList();
+
+            if (onesWithSharedGears.Count() == 2)
+            {
+                bool pairAlreadyAdded = pairs
+                    .Any(pair =>
+                    pair[0].Numbers == onesWithSharedGears[0].Numbers
+                    && pair[1].Numbers == onesWithSharedGears[1].Numbers);
+
+                if (!pairAlreadyAdded)
+                {
+                    pairs.Add(onesWithSharedGears);
+                }
+            }
+        }
+        var result = 0;
+        foreach (var pair in pairs)
+        {
+            result += pair[0].Numbers * pair[1].Numbers;
+        }
+
+        return result;
+    }
+
+    private static List<SerialNumberPart> GetSerialNumberParts()
+    {
         var serialNumberParts = new List<SerialNumberPart>();
 
         for (int i = 0; i < _map.Count; i++)
@@ -35,9 +77,16 @@ internal class EngineTools
                 serialNumberPart = new List<MappedChar>();
             }
         }
-        var smth = serialNumberParts;
-        return serialNumberParts
-            .Where(serialNumberPart => 
+        return serialNumberParts;
+    }
+
+    public static int GetSerialNumberSum(List<string> engineInfo)
+    {
+        MapEngineInfo(engineInfo);
+
+
+        return GetSerialNumberParts()
+            .Where(serialNumberPart =>
             serialNumberPart.Neighbors.Any(neighbor => neighbor.Value != '.'))
             .Sum(snp => snp.Numbers);
     }
@@ -54,12 +103,12 @@ internal class EngineTools
              || ((mi.X >= fromX - 1 && mi.X <= toX + 1) && mi.Y == y + 1)
              || (mi.X == fromX - 1 && mi.Y == y)
              || (mi.X == toX + 1 && mi.Y == y))
-            .ToList()
+            .ToList();
     }
     private static int GetNumberFromCoordinates(int fromX, int toX, int y)
     {
         var number = new StringBuilder();
-        for (int i = fromX; i < toX+1; i++)
+        for (int i = fromX; i < toX + 1; i++)
         {
             number.Append(_map.First(mappedChar => mappedChar.X == i && mappedChar.Y == y).Value.ToString());
         }

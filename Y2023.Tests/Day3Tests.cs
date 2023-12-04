@@ -4,10 +4,7 @@ namespace Y2023.Tests;
 
 public class Day3Tests
 {
-    [Fact]
-    public void GetSerialNumber_ShouldReturnExpected()
-    {
-        var input = new List<string>{
+    private readonly List<string> _testData = new List<string>{
             "467..114..",
             "...*......",
             "..35..633.",
@@ -20,6 +17,16 @@ public class Day3Tests
             ".664.598..",
         };
 
-        EngineTools.GetSerialNumber(input).Should().Be(4361);
+    [Fact]
+    public void GetSerialNumber_ShouldReturnExpected()
+    {
+
+        EngineTools.GetSerialNumberSum(_testData).Should().Be(4361);
+    }
+
+    [Fact]
+    public void GetGearRatio_ShouldReturnExpected()
+    {
+        EngineTools.GetGearRatio(_testData).Should().Be(467835);
     }
 }
