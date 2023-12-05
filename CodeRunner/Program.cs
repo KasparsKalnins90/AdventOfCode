@@ -1,7 +1,7 @@
-﻿using Y2023.Day3;
+﻿using Y2023.Day4;
 using Y2023.Input;
-var fileReader = new InputFileReader("Day3.txt", "\r\n");
-var gameInfos = fileReader.GetItems();
-Console.WriteLine(EngineTools.GetGearRatio  (gameInfos));
+var fileReader = new InputFileReader("Day4.txt", "\r\n");
+var tickets = fileReader.GetItems();
+Console.WriteLine(TicketScoreChecker.AccumulateScratchCards(tickets));
 
 
