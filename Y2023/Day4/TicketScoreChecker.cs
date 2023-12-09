@@ -7,9 +7,8 @@ internal static class TicketScoreChecker
 
         return ParseTickets(tickets)
             .Select(card => card.MyNumbers
-            .Where(myNumber => card.WinningNumbers
-            .Any(winningNumber => winningNumber == myNumber))
-            .Count())
+                .Count(myNumber => card.WinningNumbers
+                    .Any(winningNumber => winningNumber == myNumber)))
             .Where(matchCount => matchCount >= 1)
             .Sum(CaluclateCardScore);
     }
@@ -17,22 +16,20 @@ internal static class TicketScoreChecker
     public static int AccumulateScratchCards(List<string> scratchcards)
     {
         var tickets = ParseTickets(scratchcards).OrderBy(ticket => ticket.Id).ToList();
-        for (var ticketIndex = 0; ticketIndex < tickets.Count; ticketIndex++)
+        foreach (var currentTicket in tickets)
         {
-            var currentTicket = tickets[ticketIndex];
+            var ticket = currentTicket;
             var pairs = currentTicket.MyNumbers
-                .Where(myNumber => currentTicket.WinningNumbers.Any(winningNumber => winningNumber == myNumber))
-                .Count();
-            for (int i = 0; i < pairs; i++)
+                .Count(myNumber => ticket.WinningNumbers.Any(winningNumber => winningNumber == myNumber));
+            for (var i = 0; i < pairs; i++)
             {
                 var ticketToUpdate = tickets.First(ticketInStack => ticketInStack.Id == currentTicket.Id + i + 1);
                 ticketToUpdate.Count += currentTicket.Count;
             }
-
         }
         return tickets.Sum(ticket => ticket.Count);
     }
-    private static List<ScratchTicket> ParseTickets(List<string> ticketInfo)
+    private static List<ScratchTicket> ParseTickets(IEnumerable<string> ticketInfo)
     {
         return ticketInfo.Select(ticketLine =>
         {
@@ -42,12 +39,12 @@ internal static class TicketScoreChecker
             var winningNumbers = splitLine[0]
             .Split(' ')
             .Where(num => !string.IsNullOrEmpty(num))
-            .Select(item => int.Parse(item))
+            .Select(int.Parse)
             .ToList();
             var myNumbers = splitLine[1]
             .Split(' ')
             .Where(num => !string.IsNullOrEmpty(num))
-            .Select(item => int.Parse(item))
+            .Select(int.Parse)
             .ToList();
             return new ScratchTicket
             {
@@ -61,7 +58,7 @@ internal static class TicketScoreChecker
     private static int CaluclateCardScore(int numberOfMatces)
     {
         var score = 1;
-        for (int i = 1; i < numberOfMatces; i++)
+        for (var i = 1; i < numberOfMatces; i++)
         {
             score *= 2;
         }
