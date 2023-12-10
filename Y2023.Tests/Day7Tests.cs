@@ -18,4 +18,10 @@ public class Day7Tests
     {
         PokerScoreCounter.GetScore(_pokerHands).Should().Be(6440);
     }
+    
+    [Fact]
+    public void GetPokerScoreWithJokers_ShouldReturnExpectedScore()
+    {
+        PokerScoreCounter.GetScoreWithJokers(_pokerHands).Should().Be(5905);
+    }
 }
